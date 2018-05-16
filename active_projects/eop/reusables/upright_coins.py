@@ -24,13 +24,13 @@ class UprightCoin(Circle):
 
 class UprightHeads(UprightCoin):
     CONFIG = {
-        "fill_color": COLOR_HEADS_COIN,
+        "fill_color": COLOR_HEADS,
         "symbol": "H",
     }
 
 class UprightTails(UprightCoin):
     CONFIG = {
-        "fill_color": COLOR_TAILS_COIN,
+        "fill_color": COLOR_TAILS,
         "symbol": "T",
     }
 
@@ -120,13 +120,13 @@ class FlatCoin(UprightCoin):
 
 class FlatHeads(FlatCoin):
     CONFIG = {
-        "fill_color": COLOR_HEADS_COIN,
+        "fill_color": COLOR_HEADS,
         "symbol": "H",
     }
     
 class FlatTails(FlatCoin):
     CONFIG = {
-        "fill_color": COLOR_TAILS_COIN,
+        "fill_color": COLOR_TAILS,
         "symbol": "T",
     }
     
