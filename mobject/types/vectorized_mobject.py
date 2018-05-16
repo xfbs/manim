@@ -131,6 +131,9 @@ class VMobject(Mobject):
     def get_fill_rgb(self):
         return np.clip(self.fill_rgb, 0, 1)
 
+    def get_fill_rgba(self):
+        return np.append(self.get_fill_rgb(), self.get_fill_opacity())
+
     def get_fill_color(self):
         try:
             self.fill_rgb = np.clip(self.fill_rgb, 0.0, 1.0)
@@ -143,6 +146,9 @@ class VMobject(Mobject):
 
     def get_stroke_rgb(self):
         return np.clip(self.stroke_rgb, 0, 1)
+
+    def get_stroke_rgba(self):
+        return np.append(self.get_stroke_rgb(), 1)
 
     def get_stroke_color(self):
         try:
