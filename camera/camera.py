@@ -83,11 +83,8 @@ class Camera(object):
     def init_background(self):
         if self.background_image is not None:
             path = get_full_raster_image_path(self.background_image)
-<<<<<<< HEAD
             image = Image.open(path).convert("RGBA") #(self.image_mode)
-=======
-            image = Image.open(path).convert(self.image_mode)
->>>>>>> master
+
             height, width = self.pixel_shape
             # TODO, how to gracefully handle backgrounds
             # with different sizes?
@@ -536,11 +533,7 @@ class Camera(object):
         impa = image_mobject.pixel_array
 
         oh, ow = self.pixel_array.shape[:2]  # Outer width and height
-<<<<<<< HEAD
         ih, iw = impa.shape[:2]  # inner width and height
-=======
-        ih, iw = impa.shape[:2]  # inner with and height
->>>>>>> master
         rgb_len = self.pixel_array.shape[2]
 
         image = np.zeros((oh, ow, rgb_len), dtype=self.pixel_array_dtype)
@@ -595,7 +588,6 @@ class Camera(object):
             image = image.reshape((ow * oh, rgb_len))
             image[to_change] = target_rgbas
             image = image.reshape((oh, ow, rgb_len))
-<<<<<<< HEAD
 
         if self.image_mode == "RGBA":
             self.overlay_rgba_array(image, premultiplied = False)
@@ -627,41 +619,14 @@ class Camera(object):
             out_a[..., None],
             zero_over_zero_value=0
         )
-=======
-        self.overlay_rgba_array(image)
-
-    def overlay_rgba_array(self, arr):
-        fg = arr
-        bg = self.pixel_array
-        # rgba_max_val = self.rgb_max_val
-        src_rgb, src_a, dst_rgb, dst_a = [
-            a.astype(np.float32) / self.rgb_max_val
-            for a in fg[..., :3], fg[..., 3], bg[..., :3], bg[..., 3]
-        ]
-
-        out_a = src_a + dst_a * (1.0 - src_a)
-
-        # When the output alpha is 0 for full transparency,
-        # we have a choice over what RGB value to use in our
-        # output representation. We choose 0 here.
-        out_rgb = fdiv(
-            src_rgb * src_a[..., None] +
-            dst_rgb * dst_a[..., None] * (1.0 - src_a[..., None]),
-            out_a[..., None],
-            zero_over_zero_value=0
-        )
-
-        self.pixel_array[..., :3] = out_rgb * self.rgb_max_val
-        self.pixel_array[..., 3] = out_a * self.rgb_max_val
-
-    def align_points_to_camera(self, points):
-        # This is where projection should live
-        return points - self.space_center
->>>>>>> master
 
         self.pixel_array[..., :3] = out_rgb * self.rgb_max_val
         self.pixel_array[..., 3] = out_a * self.rgb_max_val
         
+
+    def align_points_to_camera(self, points):
+        # This is where projection should live
+        return points - self.space_center
 
     def get_extended_pixel_array_dtype(self):
         dtype_converter = {
