@@ -3,12 +3,7 @@ from big_ol_pile_of_manim_imports import *
 from active_projects.eop.reusable_imports import *
 from active_projects.eop.chapter1.brick_row_scene import BrickRowScene
 
-class EntireBrickWall(BrickRowScene, MovingCameraScene):
-
-    def setup(self):
-        super(BrickRowScene, self).setup()
-        super(PiCreatureScene, self).setup()
-
+class EntireBrickWall(BrickRowScene):
 
     def construct(self):
 
@@ -50,6 +45,7 @@ class EntireBrickWall(BrickRowScene, MovingCameraScene):
             rows.submobjects[-1] = self.merge_rects_by_coloring(rows[-1])
 
 
+
         # draw indices under the last row for the number of tails
         tails_counters = VGroup()
         for (i, rect) in enumerate(rows[-1].rects):
@@ -87,7 +83,6 @@ class EntireBrickWall(BrickRowScene, MovingCameraScene):
         last_row_rect = SurroundingRectangle(rows[-1], buff = 0)
         last_row_rect.set_stroke(color = YELLOW, width = 6)
 
-        rows.save_state()
         self.play(
             rows.fade, 0.9,
             ShowCreation(last_row_rect)
@@ -107,40 +102,24 @@ class EntireBrickWall(BrickRowScene, MovingCameraScene):
             highlighted_brick(row = 20, nb_tails = i)
             for i in range(20)
         ]
-        self.wait()
+
         self.play(
             FadeIn(highlighted_bricks[10])
         )
-        self.wait()
+
         self.play(
             FadeOut(highlighted_bricks[10]),
             FadeIn(highlighted_bricks[9]),
             FadeIn(highlighted_bricks[11]),
         )
-        self.wait()
+
         self.play(
             FadeOut(highlighted_bricks[9]),
             FadeOut(highlighted_bricks[11]),
             FadeIn(highlighted_bricks[8]),
             FadeIn(highlighted_bricks[12]),
         )
-        self.wait()
-        self.play(
-            FadeOut(highlighted_bricks[8]),
-            FadeOut(highlighted_bricks[12]),
-            FadeOut(last_row_rect),
-            rows.restore,
-        )
-        self.wait()
-        new_frame = self.camera_frame.copy()
-        new_frame.scale(0.0001).move_to(rows.get_corner(DR))
 
-        self.play(
-            Transform(self.camera_frame, new_frame,
-                run_time = 9,
-                rate_func = exponential_decay
-            )
-        )
 
 
 
