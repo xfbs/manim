@@ -206,7 +206,32 @@ COLOR_MAP = {
     "PINK": "#D147BD",
     "GREEN_SCREEN": "#00FF00",
     "ORANGE": "#FF862F",
+    "SRCERY_BLACK" : "#1C1B19",
+    "SRCERY_RED" : "#EF2F27",
+    "SRCERY_GREEN" : "#519F50",
+    "SRCERY_YELLOW" : "#FBB829",
+    "SRCERY_BLUE" : "#2C78BF",
+    "SRCERY_MAGENTA" : "#E02C6D",
+    "SRCERY_CYAN": "#0AAEB3",
+    "SRCERY_WHITE" : "#918175",
+    "SRCERY_BRIGHT_BLACK" : "#2D2C29",
+    "SRCERY_BRIGHT_RED" : "#F75341",
+    "SRCERY_BRIGHT_GREEN" : "#98BC37",
+    "SRCERY_BRIGHT_YELLOW" : "#FED06E",
+    "SRCERY_BRIGHT_BLUE" : "#68A8E4",
+    "SRCERY_BRIGHT_MAGENTA" : "#FF5C8F",
+    "SRCERY_BRIGHT_CYAN" : "#53FDE9",
+    "SRCERY_BRIGHT_WHITE" : "#FCE8C3",
+    "SRCERY_ORANGE" : "#D75F00",
+    "SRCERY_BRIGHT_ORANGE" : "#FF8700",
+    "SRCERY_HARD_BLACK" : "#121212",
+    "SRCERY_XGRAY1" : "#262626",
+    "SRCERY_XGRAY2" : "#303030",
+    "SRCERY_XGRAY3" : "#3A3A3A",
+    "SRCERY_XGRAY4" : "#444444",
+    "SRCERY_XGRAY5" : "#4E4E4E",
 }
+
 PALETTE = list(COLOR_MAP.values())
 locals().update(COLOR_MAP)
 for name in [s for s in list(COLOR_MAP.keys()) if s.endswith("_C")]:
