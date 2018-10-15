@@ -39,6 +39,11 @@ class Lightbulb(SVGMobject):
         "fill_opacity": 0,
     }
 
+class AppleMac(SVGMobject):
+    CONFIG = {
+        "file_name": "apple-01.svg"
+    }
+
 
 class BitcoinLogo(SVGMobject):
     CONFIG = {
