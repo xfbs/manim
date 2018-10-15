@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qqy
 RUN apt-get install -qqy --no-install-recommends apt-utils
 
+# Install Python 3.7.
 WORKDIR /root
 RUN apt-get install -qqy build-essential libsqlite3-dev sqlite3 bzip2 \
                          libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev \
@@ -15,21 +16,22 @@ RUN tar -xf Python-3.7.0.tgz
 WORKDIR Python-3.7.0
 RUN ./configure > /dev/null && make -s && make -s install
 RUN python3 -m pip install --upgrade pip
+WORKDIR /root
+RUN rm -rf Python-3.7.0*
+
+# Install requirements.
 RUN apt-get install -qqy libcairo2-dev libjpeg-dev libgif-dev
 COPY requirements.txt requirements.txt
 RUN python3 -m pip install -r requirements.txt
 RUN rm requirements.txt
-WORKDIR /root
-RUN rm -rf Python-3.7.0*
-
 RUN apt-get install -qqy ffmpeg
 
+# Setup timezone, necessary for textlive.
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get install -qqy apt-transport-https
-RUN apt-get install -qqy texlive-latex-base 
 RUN apt-get install -qqy texlive-full
-RUN apt-get install -qqy texlive-fonts-extra
 RUN apt-get install -qqy sox
 RUN apt-get install -qqy git
 
